@@ -1,0 +1,893 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="上原有理｜AI・GASを活用した業務改善ポートフォリオ" />
+  <title>上原有理｜AI × 業務改善 Portfolio</title>
+  <style>
+    :root{
+      --bg:#f7f9fc;
+      --card:#ffffff;
+      --text:#151923;
+      --muted:#697386;
+      --line:#dfe5ef;
+      --accent:#2f6fed;
+      --accent-soft:#eaf1ff;
+      --dark:#0f172a;
+      --success:#1f9d68;
+      --danger:#d9534f;
+      --shadow:0 12px 35px rgba(15,23,42,.08);
+      --radius:22px;
+    }
+
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans JP","Hiragino Kaku Gothic ProN",Meiryo,sans-serif;
+      color:var(--text);
+      background:
+        radial-gradient(circle at 10% 10%, rgba(47,111,237,.08), transparent 28%),
+        radial-gradient(circle at 90% 20%, rgba(31,157,104,.06), transparent 24%),
+        var(--bg);
+      line-height:1.75;
+    }
+
+    a{color:inherit;text-decoration:none}
+    img{max-width:100%}
+
+    .container{
+      width:min(1120px, calc(100% - 40px));
+      margin:0 auto;
+    }
+
+    .nav{
+      position:sticky;
+      top:0;
+      z-index:50;
+      backdrop-filter:blur(14px);
+      background:rgba(247,249,252,.82);
+      border-bottom:1px solid rgba(223,229,239,.7);
+    }
+    .nav-inner{
+      height:68px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:16px;
+    }
+    .brand{
+      font-weight:800;
+      letter-spacing:.02em;
+    }
+    .brand span{color:var(--accent)}
+    .nav-links{
+      display:flex;
+      gap:22px;
+      font-size:.93rem;
+      color:var(--muted);
+      flex-wrap:wrap;
+      justify-content:flex-end;
+    }
+    .nav-links a:hover{color:var(--accent)}
+
+    .hero{
+      padding:96px 0 70px;
+    }
+    .eyebrow{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:8px 12px;
+      background:var(--accent-soft);
+      color:var(--accent);
+      border-radius:999px;
+      font-size:.85rem;
+      font-weight:700;
+      margin-bottom:24px;
+    }
+    .hero h1{
+      font-size:clamp(2.5rem,5.1vw,4.9rem);
+      line-height:1.08;
+      letter-spacing:-.04em;
+      margin:0 0 26px;
+      max-width:1120px;
+    }
+    .hero-title .hero-line{
+      display:block;
+      white-space:nowrap;
+    }
+    .hero h1 .accent{color:var(--accent)}
+    .hero-lead{
+      font-size:clamp(1rem,2.2vw,1.35rem);
+      color:var(--muted);
+      max-width:760px;
+      margin-bottom:30px;
+    }
+    .hero-actions{
+      display:flex;
+      gap:14px;
+      flex-wrap:wrap;
+      margin-top:32px;
+    }
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      padding:13px 18px;
+      border-radius:12px;
+      font-weight:700;
+      transition:.2s ease;
+      border:1px solid transparent;
+    }
+    .btn.primary{
+      background:var(--dark);
+      color:#fff;
+    }
+    .btn.primary:hover{transform:translateY(-2px)}
+    .btn.secondary{
+      border-color:var(--line);
+      background:#fff;
+    }
+
+    section{padding:74px 0}
+    .section-kicker{
+      color:var(--accent);
+      font-weight:800;
+      font-size:.82rem;
+      letter-spacing:.12em;
+      text-transform:uppercase;
+      margin-bottom:10px;
+    }
+    .section-title{
+      font-size:clamp(1.8rem,3vw,3rem);
+      line-height:1.2;
+      margin:0 0 14px;
+      letter-spacing:-.025em;
+    }
+    .section-desc{
+      color:var(--muted);
+      max-width:760px;
+      margin-bottom:36px;
+    }
+
+    .principles{
+      display:grid;
+      grid-template-columns:repeat(4,1fr);
+      gap:16px;
+    }
+    .principle{
+      background:var(--card);
+      padding:24px;
+      border:1px solid var(--line);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      position:relative;
+      overflow:hidden;
+    }
+    .principle::after{
+      content:"";
+      position:absolute;
+      width:70px;height:70px;
+      border-radius:50%;
+      right:-22px;bottom:-22px;
+      background:var(--accent-soft);
+    }
+    .principle .step{
+      width:34px;height:34px;
+      border-radius:10px;
+      display:grid;place-items:center;
+      background:var(--dark);
+      color:#fff;
+      font-weight:800;
+      margin-bottom:18px;
+    }
+    .principle h3{margin:0 0 8px;font-size:1.08rem}
+    .principle p{margin:0;color:var(--muted);font-size:.94rem}
+
+    .metrics{
+      display:grid;
+      grid-template-columns:repeat(4,1fr);
+      gap:16px;
+    }
+    .metric{
+      background:#fff;
+      border:1px solid var(--line);
+      border-radius:var(--radius);
+      padding:24px;
+    }
+    .metric strong{
+      display:block;
+      font-size:2.3rem;
+      line-height:1;
+      margin-bottom:10px;
+      letter-spacing:-.03em;
+    }
+    .metric span{
+      color:var(--muted);
+      font-size:.92rem;
+    }
+
+    .case-grid{
+      display:grid;
+      gap:22px;
+    }
+    .case{
+      background:#fff;
+      border:1px solid var(--line);
+      border-radius:28px;
+      padding:30px;
+      box-shadow:var(--shadow);
+    }
+    .case-head{
+      display:flex;
+      align-items:flex-start;
+      justify-content:space-between;
+      gap:16px;
+      flex-wrap:wrap;
+      margin-bottom:22px;
+    }
+    .case-no{
+      color:var(--accent);
+      font-size:.82rem;
+      font-weight:800;
+      letter-spacing:.12em;
+    }
+    .case h3{
+      margin:5px 0 0;
+      font-size:1.55rem;
+    }
+    .tag{
+      background:var(--accent-soft);
+      color:var(--accent);
+      border-radius:999px;
+      padding:7px 11px;
+      font-size:.8rem;
+      font-weight:700;
+    }
+    .case-columns{
+      display:grid;
+      grid-template-columns:1fr 1.15fr;
+      gap:22px;
+    }
+    .info-block{
+      border:1px solid var(--line);
+      border-radius:18px;
+      padding:18px;
+      background:#fbfcfe;
+    }
+    .info-block h4{
+      margin:0 0 8px;
+      font-size:.88rem;
+      color:var(--muted);
+      text-transform:uppercase;
+      letter-spacing:.08em;
+    }
+    .info-block p{margin:0}
+    .thinking{
+      border-left:4px solid var(--accent);
+      padding:14px 16px;
+      background:var(--accent-soft);
+      border-radius:0 14px 14px 0;
+      margin-top:14px;
+    }
+
+    .flow{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      flex-wrap:wrap;
+      margin-top:15px;
+    }
+    .flow .node{
+      padding:10px 12px;
+      border-radius:12px;
+      border:1px solid var(--line);
+      background:#fff;
+      font-weight:700;
+      font-size:.86rem;
+    }
+    .arrow{color:#9aa4b2;font-weight:900}
+
+    .watchdog{
+      background:linear-gradient(145deg,#0f172a,#172033);
+      color:#fff;
+      border-radius:30px;
+      padding:34px;
+      overflow:hidden;
+      position:relative;
+    }
+    .watchdog .section-kicker{color:#86a8ff}
+    .watchdog .section-desc{color:#c2cad6}
+    .watch-grid{
+      display:grid;
+      grid-template-columns:1.05fr .95fr;
+      gap:26px;
+      align-items:center;
+    }
+    .watch-panel{
+      background:rgba(255,255,255,.06);
+      border:1px solid rgba(255,255,255,.12);
+      border-radius:22px;
+      padding:22px;
+    }
+    .pipeline{
+      display:grid;
+      gap:11px;
+    }
+    .pipe-row{
+      display:grid;
+      grid-template-columns:42px 1fr auto;
+      align-items:center;
+      gap:12px;
+      padding:11px 13px;
+      border-radius:14px;
+      background:rgba(255,255,255,.07);
+    }
+    .icon{
+      width:34px;height:34px;
+      border-radius:10px;
+      display:grid;place-items:center;
+      background:rgba(255,255,255,.1);
+    }
+    .status{
+      font-size:.75rem;
+      font-weight:800;
+      color:#b9c3d2;
+    }
+    .status.ok{color:#74e0ae}
+    .status.fail{color:#ff9994}
+    .status.recover{color:#9eb6ff}
+
+    .dog{
+      font-size:5rem;
+      line-height:1;
+      margin-bottom:16px;
+      filter:drop-shadow(0 10px 22px rgba(0,0,0,.2));
+    }
+    .watch-points{
+      display:grid;
+      grid-template-columns:repeat(2,1fr);
+      gap:10px;
+      margin-top:18px;
+    }
+    .watch-point{
+      padding:12px;
+      border-radius:12px;
+      background:rgba(255,255,255,.07);
+      font-size:.88rem;
+    }
+
+    .how-grid{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:16px;
+    }
+    .how-card{
+      padding:24px;
+      border:1px solid var(--line);
+      border-radius:var(--radius);
+      background:#fff;
+    }
+    .how-card .n{
+      font-size:2rem;
+      font-weight:900;
+      color:#d8dfeb;
+    }
+    .how-card h3{
+      margin:6px 0 8px;
+      line-height:1.5;
+    }
+    .how-card p{margin:0;color:var(--muted)}
+
+    .skills{
+      display:grid;
+      grid-template-columns:repeat(5,1fr);
+      gap:14px;
+    }
+    .skill{
+      padding:20px;
+      background:#fff;
+      border:1px solid var(--line);
+      border-radius:18px;
+    }
+    .skill h4{margin:0 0 10px}
+    .skill p{margin:0;color:var(--muted);font-size:.9rem}
+
+    .profile{
+      display:grid;
+      grid-template-columns:.7fr 1.3fr;
+      gap:28px;
+      align-items:start;
+    }
+    .profile-card{
+      background:var(--dark);
+      color:#fff;
+      border-radius:26px;
+      padding:28px;
+    }
+    .profile-card .name{
+      font-size:1.7rem;
+      font-weight:800;
+      margin-bottom:5px;
+    }
+    .profile-card p{
+      margin:0;
+      color:#c8d0dc;
+    }
+    .profile-copy{
+      background:#fff;
+      border:1px solid var(--line);
+      border-radius:26px;
+      padding:28px;
+    }
+    .profile-copy blockquote{
+      margin:18px 0 0;
+      padding:16px 18px;
+      border-left:4px solid var(--accent);
+      background:var(--accent-soft);
+      font-weight:700;
+    }
+
+    .watchdog-title{
+      font-size:clamp(2rem,3.4vw,3.7rem);
+      line-height:1.28;
+    }
+    .watchdog-title .title-line{
+      display:block;
+      white-space:nowrap;
+    }
+
+    footer{
+      padding:38px 0 54px;
+      color:var(--muted);
+      font-size:.9rem;
+    }
+
+    .reveal{
+      opacity:0;
+      transform:translateY(18px);
+      transition:.7s ease;
+    }
+    .reveal.show{
+      opacity:1;
+      transform:none;
+    }
+
+    @media (max-width:900px){
+      .principles,.metrics{grid-template-columns:repeat(2,1fr)}
+      .case-columns,.watch-grid,.profile{grid-template-columns:1fr}
+      .skills{grid-template-columns:repeat(2,1fr)}
+      .how-grid{grid-template-columns:1fr}
+    }
+
+    @media (max-width:620px){
+      .container{width:min(100% - 24px,1120px)}
+      .hero{padding:68px 0 46px}
+      .nav-links{display:none}
+      .principles,.metrics,.skills{grid-template-columns:1fr}
+      .case,.watchdog{padding:22px}
+      section{padding:56px 0}
+      .hero h1{font-size:2.25rem}
+      .hero-title .hero-line{white-space:normal}
+      .watchdog-title .title-line{white-space:normal}
+    }
+  </style>
+</head>
+<body>
+  <nav class="nav">
+    <div class="container nav-inner">
+      <div class="brand">YURI UEHARA <span>PORTFOLIO</span></div>
+      <div class="nav-links">
+        <a href="#philosophy">Philosophy</a>
+        <a href="#cases">Cases</a>
+        <a href="#watchdog">Watchdog</a>
+        <a href="#skills">Skills</a>
+        <a href="#profile">Profile</a>
+      </div>
+    </div>
+  </nav>
+
+  <main>
+    <section class="hero">
+      <div class="container">
+        <div class="eyebrow">AI × 業務改善 × GAS Automation</div>
+        <h1 class="hero-title">
+          <span class="hero-line">AIで「作れる」は当たり前。</span>
+          <span class="hero-line">現場で<span class="accent">「回り続ける」</span>仕組みをつくる。</span>
+        </h1>
+        <p class="hero-lead">
+          バックオフィス・カスタマーサポートの実務を起点に、
+          課題整理、自動化、運用、監視、改善まで。
+          「機能を増やすこと」ではなく「現場の手間を減らすこと」を目的に設計しています。
+        </p>
+        <div class="hero-actions">
+          <a class="btn primary" href="#cases">改善事例を見る</a>
+          <a class="btn secondary" href="#watchdog">運用・保守設計を見る</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="philosophy">
+      <div class="container reveal">
+        <div class="section-kicker">Philosophy</div>
+        <h2 class="section-title">つくって終わりではなく、「使われ続ける」まで。</h2>
+        <p class="section-desc">
+          自動化は、正常に一度動けば完成ではありません。
+          業務量の増加、担当者変更、データ不備、APIエラー、タイムアウトなど、
+          実運用で起こることまで含めて考えます。
+        </p>
+
+        <div class="principles">
+          <div class="principle">
+            <div class="step">1</div>
+            <h3>BUILD</h3>
+            <p>現場の業務を理解し、そもそも何を減らすべきかから整理します。</p>
+          </div>
+          <div class="principle">
+            <div class="step">2</div>
+            <h3>OPERATE</h3>
+            <p>担当者が迷わず使え、引き継いでも回る運用に落とし込みます。</p>
+          </div>
+          <div class="principle">
+            <div class="step">3</div>
+            <h3>MONITOR</h3>
+            <p>停止・異常・データ不備を検知し、見えない失敗を減らします。</p>
+          </div>
+          <div class="principle">
+            <div class="step">4</div>
+            <h3>IMPROVE</h3>
+            <p>実運用で見えた課題をもとに、仕組みそのものを改善します。</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="container reveal">
+        <div class="section-kicker">Performance Highlights</div>
+        <h2 class="section-title">現場で使われた結果を、数字で。</h2>
+        <div class="metrics">
+          <div class="metric"><strong>-67%</strong><span>週次報告の確認工数</span></div>
+          <div class="metric"><strong>0件</strong><span>配送依頼の見落とし</span></div>
+          <div class="metric"><strong>手動ゼロ</strong><span>営業・売掛の週次集計</span></div>
+          <div class="metric"><strong>17名</strong><span>AI活用状況を可視化</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="cases">
+      <div class="container reveal">
+        <div class="section-kicker">Case Studies</div>
+        <h2 class="section-title">「何を作ったか」より、「どう考えたか」。</h2>
+        <p class="section-desc">
+          各事例では、課題・判断・実装・運用・成果までを一つの流れとしてまとめています。
+        </p>
+
+        <div class="case-grid">
+
+          <article class="case">
+            <div class="case-head">
+              <div>
+                <div class="case-no">CASE 01</div>
+                <h3>週次報告要約Bot</h3>
+              </div>
+              <div class="tag">AI要約 / GAS / Trello</div>
+            </div>
+            <div class="case-columns">
+              <div>
+                <div class="info-block">
+                  <h4>Problem</h4>
+                  <p>週次報告の確認が分散し、管理側が毎回すべてを読み込む必要がありました。</p>
+                </div>
+                <div class="thinking">
+                  <strong>Thinking</strong><br>
+                  単純にAIで要約するのではなく、「管理者が何を確認したいか」を先に定義し、
+                  重要項目を標準化したうえで要約・数値化する設計にしました。
+                </div>
+              </div>
+              <div>
+                <div class="info-block">
+                  <h4>Flow</h4>
+                  <div class="flow">
+                    <div class="node">週次報告</div><div class="arrow">→</div>
+                    <div class="node">GAS取得</div><div class="arrow">→</div>
+                    <div class="node">AI要約</div><div class="arrow">→</div>
+                    <div class="node">重要項目抽出</div><div class="arrow">→</div>
+                    <div class="node">Trello連携</div>
+                  </div>
+                </div>
+                <div class="info-block" style="margin-top:14px">
+                  <h4>Result</h4>
+                  <p><strong>確認時間 60分 → 20分。約67%削減。</strong></p>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <article class="case">
+            <div class="case-head">
+              <div>
+                <div class="case-no">CASE 02</div>
+                <h3>配送管理の自動化</h3>
+              </div>
+              <div class="tag">Forms / GAS / Chatwork API</div>
+            </div>
+            <div class="case-columns">
+              <div>
+                <div class="info-block">
+                  <h4>Problem</h4>
+                  <p>フォーム回答後、人が確認・転記・通知する工程があり、深夜や休日の回答では見落としリスクが残っていました。</p>
+                </div>
+                <div class="thinking">
+                  <strong>Thinking</strong><br>
+                  「確認を速くする」のではなく、
+                  <strong>「人が確認しなければ配送されない構造」そのものをなくす</strong>方向で設計しました。
+                </div>
+              </div>
+              <div>
+                <div class="info-block">
+                  <h4>Before → After</h4>
+                  <div class="flow">
+                    <div class="node">フォーム</div><div class="arrow">→</div>
+                    <div class="node">👤 確認</div><div class="arrow">→</div>
+                    <div class="node">👤 在庫更新</div><div class="arrow">→</div>
+                    <div class="node">👤 通知</div>
+                  </div>
+                  <div style="height:10px"></div>
+                  <div class="flow">
+                    <div class="node">フォーム</div><div class="arrow">→</div>
+                    <div class="node">GAS判定</div><div class="arrow">→</div>
+                    <div class="node">在庫更新</div><div class="arrow">→</div>
+                    <div class="node">Chatwork通知</div>
+                  </div>
+                </div>
+                <div class="info-block" style="margin-top:14px">
+                  <h4>Result</h4>
+                  <p><strong>配送依頼の見落とし 0件。</strong></p>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <article class="case">
+            <div class="case-head">
+              <div>
+                <div class="case-no">CASE 03</div>
+                <h3>営業集計・売掛管理の自動化</h3>
+              </div>
+              <div class="tag">Google Sheets / GAS / Monitoring</div>
+            </div>
+            <div class="case-columns">
+              <div>
+                <div class="info-block">
+                  <h4>Problem</h4>
+                  <p>週次集計・残高確認・期限超過チェックなど、複数の手作業が発生していました。</p>
+                </div>
+                <div class="thinking">
+                  <strong>Thinking</strong><br>
+                  正しいデータを処理するだけでなく、期限超過やデータ不備など
+                  <strong>「異常を見つける」役割まで自動化</strong>する設計にしました。
+                </div>
+              </div>
+              <div>
+                <div class="info-block">
+                  <h4>Flow</h4>
+                  <div class="flow">
+                    <div class="node">決済データ</div><div class="arrow">→</div>
+                    <div class="node">自動集計</div><div class="arrow">→</div>
+                    <div class="node">異常判定</div><div class="arrow">→</div>
+                    <div class="node">DB更新 / 通知</div>
+                  </div>
+                  <div style="height:12px"></div>
+                  <div class="flow">
+                    <div class="node">月末残高</div><div class="arrow">→</div>
+                    <div class="node">Snapshot保存</div><div class="arrow">→</div>
+                    <div class="node">履歴蓄積</div>
+                  </div>
+                </div>
+                <div class="info-block" style="margin-top:14px">
+                  <h4>Result</h4>
+                  <p><strong>週次集計を手動ゼロ化。期限超過・不備の検知も自動化。</strong></p>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <article class="case">
+            <div class="case-head">
+              <div>
+                <div class="case-no">CASE 04</div>
+                <h3>社内AI活用ポータル</h3>
+              </div>
+              <div class="tag">AI Knowledge / Reporting</div>
+            </div>
+            <div class="case-columns">
+              <div>
+                <div class="info-block">
+                  <h4>Problem</h4>
+                  <p>AI活用事例や質問がチャット内に流れ、チームのナレッジとして蓄積しにくい状態でした。</p>
+                </div>
+                <div class="thinking">
+                  <strong>Thinking</strong><br>
+                  AI活用を「個人技」で終わらせず、事例を蓄積し、可視化し、
+                  チーム全体へ横展開できる仕組みにすることを重視しました。
+                </div>
+              </div>
+              <div>
+                <div class="info-block">
+                  <h4>Flow</h4>
+                  <div class="flow">
+                    <div class="node">質問 / 改善事例</div><div class="arrow">→</div>
+                    <div class="node">一元管理</div><div class="arrow">→</div>
+                    <div class="node">週次レポート</div><div class="arrow">→</div>
+                    <div class="node">チーム展開</div>
+                  </div>
+                </div>
+                <div class="info-block" style="margin-top:14px">
+                  <h4>Result</h4>
+                  <p><strong>17名分のAI活用状況を可視化し、社内共有を仕組み化。</strong></p>
+                </div>
+              </div>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <section id="watchdog">
+      <div class="container reveal">
+        <div class="watchdog">
+          <div class="watch-grid">
+            <div>
+              <div class="section-kicker">Reliability Design</div>
+              <h2 class="section-title watchdog-title">
+                <span class="title-line">「止まらない」ではなく、</span>
+                <span class="title-line">「止まっても戻れる」。</span>
+              </h2>
+              <p class="section-desc">
+                Apps Scriptのように実行時間制限がある環境では、
+                大量処理を「一度で最後まで走り切る」ことだけに依存すると、
+                運用上のリスクが残ります。
+                そのため、途中停止を前提にした復旧設計を組み込みます。
+              </p>
+              <div class="watch-points">
+                <div class="watch-point">処理の分割</div>
+                <div class="watch-point">進捗の保存</div>
+                <div class="watch-point">実行状態の監視</div>
+                <div class="watch-point">自動リトライ</div>
+                <div class="watch-point">異常通知</div>
+                <div class="watch-point">再開ポイント管理</div>
+              </div>
+            </div>
+
+            <div class="watch-panel">
+              <div class="dog">🐕</div>
+              <div class="pipeline">
+                <div class="pipe-row">
+                  <div class="icon">▶</div>
+                  <div><strong>処理開始</strong><br><small>バッチ処理を開始</small></div>
+                  <div class="status ok">RUN</div>
+                </div>
+                <div class="pipe-row">
+                  <div class="icon">💾</div>
+                  <div><strong>Checkpoint</strong><br><small>進捗位置を保存</small></div>
+                  <div class="status ok">SAVE</div>
+                </div>
+                <div class="pipe-row">
+                  <div class="icon">⏱</div>
+                  <div><strong>Timeout</strong><br><small>実行時間上限で停止</small></div>
+                  <div class="status fail">STOP</div>
+                </div>
+                <div class="pipe-row">
+                  <div class="icon">🐕</div>
+                  <div><strong>Watchdog</strong><br><small>未完了状態を検知</small></div>
+                  <div class="status recover">DETECT</div>
+                </div>
+                <div class="pipe-row">
+                  <div class="icon">↻</div>
+                  <div><strong>Restart</strong><br><small>Checkpointから再開</small></div>
+                  <div class="status recover">RETRY</div>
+                </div>
+                <div class="pipe-row">
+                  <div class="icon">✓</div>
+                  <div><strong>Complete</strong><br><small>未処理分まで完了</small></div>
+                  <div class="status ok">DONE</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="container reveal">
+        <div class="section-kicker">How I Think</div>
+        <h2 class="section-title">機能より先に、現場を見る。</h2>
+        <div class="how-grid">
+          <div class="how-card">
+            <div class="n">01</div>
+            <h3>作業を速くする前に、作業自体をなくせないか考える。</h3>
+            <p>「効率化」ではなく、そもそもその確認・転記・連絡が必要なのかから見直します。</p>
+          </div>
+          <div class="how-card">
+            <div class="n">02</div>
+            <h3>うまくいく時だけでなく、想定外にも強い仕組みをつくる。</h3>
+            <p>タイムアウト、APIエラー、データ不備など、実運用で起こる失敗まで設計対象にします。</p>
+          </div>
+          <div class="how-card">
+            <div class="n">03</div>
+            <h3>自分しか触れない仕組みにしない。</h3>
+            <p>担当変更や引き継ぎがあっても運用できるよう、構造・ログ・手順を整理します。</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="skills">
+      <div class="container reveal">
+        <div class="section-kicker">Skills</div>
+        <h2 class="section-title">課題から考え、必要な仕組みをつくる。</h2>
+        <div class="skills">
+          <div class="skill"><h4>Automation</h4><p>Google Apps Script / Google Sheets / Forms / Drive</p></div>
+          <div class="skill"><h4>Integration</h4><p>Chatwork API / Trello API / Google APIs</p></div>
+          <div class="skill"><h4>AI</h4><p>ChatGPT / Claude / AI Workflow Design</p></div>
+          <div class="skill"><h4>Development</h4><p>HTML / CSS / JavaScript / clasp</p></div>
+          <div class="skill"><h4>Business</h4><p>業務整理 / CS / バックオフィス / 経理フロー改善</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="profile">
+      <div class="container reveal">
+        <div class="section-kicker">Profile</div>
+        <h2 class="section-title">業務から、必要な技術を選ぶ。</h2>
+        <div class="profile">
+          <div class="profile-card">
+            <div class="name">上原 有理</div>
+            <p>AI / 業務改善 / GAS Automation</p>
+          </div>
+          <div class="profile-copy">
+            <p>
+              バックオフィス・カスタマーサポートの現場で、
+              「これを毎回、人がやる必要があるのか？」という業務を見つけ、
+              GASやAIを使って改善してきました。
+            </p>
+            <p>
+              技術そのものを目的にするのではなく、
+              現場の手間・見落とし・属人化を減らし、
+              実際に使われ続ける形まで落とし込むことを大切にしています。
+            </p>
+            <blockquote>
+              技術ありきではなく、<br>
+              現場の課題から考える。
+            </blockquote>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      © 2026 Yuri Uehara.
+    </div>
+  </footer>
+
+  <script>
+    const observer = new IntersectionObserver((entries)=>{
+      entries.forEach(entry=>{
+        if(entry.isIntersecting){
+          entry.target.classList.add('show');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, {threshold:.12});
+
+    document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
+  </script>
+</body>
+</html>
